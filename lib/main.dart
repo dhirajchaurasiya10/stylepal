@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:stylepal/screens/another.dart';
 
 void main() {
   runApp(MyApp());
@@ -24,6 +25,13 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  int _currentIndex = 0;
+
+  void _navigatetoanother() {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => Favourites()));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,25 +39,23 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text('Flutter Example'),
       ),
       bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _currentIndex,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.business),
-            label: 'Business',
+            icon: Icon(Icons.favorite),
+            label: 'Favourites',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.school),
-            label: 'School',
+            icon: Icon(Icons.dry_cleaning_rounded),
+            label: 'Collections',
           ),
         ],
         selectedItemColor: Colors.blue,
         // Add your navigation logic here
-        onTap: (index) {
-          // Handle navigation based on the index
-        },
       ),
       body: SingleChildScrollView(
         child: Column(
