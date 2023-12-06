@@ -39,14 +39,14 @@ class _ShuffledImageGridState extends State<ShuffledImageGrid> {
     'https://i.pinimg.com/236x/5d/46/d6/5d46d6deed3b06ffa69ea4abe825c8da.jpg',
     'https://i.pinimg.com/236x/e9/ba/cf/e9bacfd5803bcee4088cbbb353783f33.jpg',
     'https://i.pinimg.com/236x/a8/3c/7a/a83c7ac1ca5a595f696b408ad8fceebe.jpg',
-    // Add more shoe image URLs as needed
+    // Add more shirt image URLs as needed
   ];
 
   final List<String> shirtImages = [
     'https://i.pinimg.com/236x/8d/15/65/8d1565e65ef2487790744508a4a3bfe5.jpg',
     'https://i.pinimg.com/236x/7f/30/54/7f305481b8a9c80ae88bfa7bbecc4af2.jpg',
     'https://i.pinimg.com/236x/76/3c/b5/763cb5c95b24efb566390bc25237e05c.jpg',
-    // Add more shirt image URLs as needed
+    // Add more shoe image URLs as needed
   ];
 
   List<String> shuffledImages = [];
@@ -64,13 +64,17 @@ class _ShuffledImageGridState extends State<ShuffledImageGrid> {
 
   void _shuffleImages() {
     setState(() {
-      // Shuffle each category individually and select one image from each category
-      final Random random = Random();
-      String randomJacket = jacketImages[random.nextInt(jacketImages.length)];
-      String randomShirt = shirtImages[random.nextInt(shirtImages.length)];
-      String randomShoe = shoeImages[random.nextInt(shoeImages.length)];
+      jacketImages.shuffle();
+      shirtImages.shuffle();
+      shoeImages.shuffle();
 
-      shuffledImages = [randomJacket, randomShirt, randomShoe];
+      // Combine shuffled images from different categories
+      shuffledImages = [
+        ...jacketImages,
+        ...shirtImages,
+        ...shoeImages,
+      ];
+
       currentIndex = 0;
     });
   }
@@ -83,28 +87,21 @@ class _ShuffledImageGridState extends State<ShuffledImageGrid> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 20, bottom: 12, left: 12, right: 12),
-      child: Center(
-        child: GridView.builder(
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 1, // Use a fixed cross-axis count of 4
-            crossAxisSpacing: 12,
-            mainAxisSpacing: 12,
-            childAspectRatio: 1.0, // Maintain the original image proportions
-          ),
-          // scrollDirection: Axis.horizontal,
-          itemCount: shuffledImages.length,
-          itemBuilder: (context, index) {
-            return Image.network(
-              shuffledImages[index],
-              width: double.infinity, // Make the image width fill the cell
-              height: double.infinity, // Make the image height fill the cell
-              fit: BoxFit.cover,
-            );
-          },
-        ),
+    return GridView.builder(
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 3,
+        crossAxisSpacing: 8.0,
+        mainAxisSpacing: 8.0,
       ),
+      itemCount: shuffledImages.length,
+      itemBuilder: (context, index) {
+        return Image.network(
+          shuffledImages[index],
+          width: 150.0,
+          height: 150.0,
+          fit: BoxFit.cover,
+        );
+      },
     );
   }
 }
