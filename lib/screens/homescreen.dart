@@ -73,7 +73,7 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Text('Drawer Header'),
             ),
             ListTile(
-              title: const Text('Home'),
+              // title: const Text('Home'),
               selected: _selectedIndex == 0,
               onTap: () {
                 // Update the state of the app
@@ -83,7 +83,7 @@ class _MyHomePageState extends State<MyHomePage> {
               },
             ),
             ListTile(
-              title: const Text('Business'),
+              // title: const Text('Business'),
               selected: _selectedIndex == 1,
               onTap: () {
                 // Update the state of the app
@@ -93,7 +93,7 @@ class _MyHomePageState extends State<MyHomePage> {
               },
             ),
             ListTile(
-              title: const Text('School'),
+              // title: const Text('School'),
               selected: _selectedIndex == 2,
               onTap: () {
                 // Update the state of the app
