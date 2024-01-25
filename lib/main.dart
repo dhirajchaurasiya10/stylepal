@@ -40,8 +40,9 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Shopify"),
+        title: const Text("StylePal"),
         backgroundColor: Color.fromARGB(255, 29, 62, 72),
+        foregroundColor: Colors.white,
         centerTitle: true,
       ),
       body: 
