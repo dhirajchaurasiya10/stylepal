@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'dart:math';
 import 'dart:async';
 
+import 'package:shared_preferences/shared_preferences.dart';
+
+
 class ShuffledImageGrid extends StatefulWidget {
   @override
   _ShuffledImageGridState createState() => _ShuffledImageGridState();
@@ -34,14 +37,32 @@ class _ShuffledImageGridState extends State<ShuffledImageGrid> {
   List<String> shuffledImages = [];
   int currentIndex = 0;
 
+  // Define a key for SharedPreferences
+  static const String lastShuffleKey = 'last_shuffle';
+
   @override
   void initState() {
     super.initState();
-    _shuffleImages();
+    // _shuffleImages();
+    _loadShuffledImages();
     // Start a timer to change the image every 5 seconds
-    Timer.periodic(Duration(seconds: 5), (Timer timer) {
-      _changeImage();
-    });
+  }
+
+  Future<void> _loadShuffledImages() async {
+    // Load the last shuffle time from SharedPreferences
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    DateTime lastShuffle = DateTime.fromMillisecondsSinceEpoch(
+        prefs.getInt(lastShuffleKey) ?? 0);
+
+    // Check if 24 hours have passed since the last shuffle
+    if (DateTime.now().difference(lastShuffle).inHours >= 24) {
+      _shuffleImages();
+      // Save the current time as the last shuffle time
+      prefs.setInt(lastShuffleKey, DateTime.now().millisecondsSinceEpoch);
+    } else {
+      // Use the existing shuffled images
+      _loadSavedImages();
+    }
   }
 
   void _shuffleImages() {
@@ -55,7 +76,32 @@ class _ShuffledImageGridState extends State<ShuffledImageGrid> {
       shuffledImages = [randomJacket, randomShirt, randomShoe];
       currentIndex = 0;
     });
+
+    _saveImages();
   }
+
+  void _saveImages() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setStringList('shuffled_images', shuffledImages);
+    prefs.setInt(lastShuffleKey, DateTime.now().millisecondsSinceEpoch);
+  }
+
+  void _loadSavedImages() async {
+  // Load the previously shuffled images from SharedPreferences
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  List<String>? savedImages = prefs.getStringList('shuffled_images');
+
+  if (savedImages != null && savedImages.isNotEmpty) {
+    setState(() {
+      shuffledImages = savedImages;
+      currentIndex = 0;
+    });
+  } else {
+    // If no saved images found, shuffle new ones
+    _shuffleImages();
+  }
+}
+
 
   void _changeImage() {
     setState(() {

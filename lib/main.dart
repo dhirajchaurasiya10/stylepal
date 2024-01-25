@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:stylepal/screens/Favourites.dart';
 
 
-import 'package:stylepal/screens/homescreen.dart';
+// import 'package:stylepal/screens/homescreen.dart';
 import 'package:stylepal/screens/profile.dart';
 import 'package:stylepal/shuffledimage.dart';
 
@@ -44,30 +44,30 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Color.fromARGB(255, 29, 62, 72),
         centerTitle: true,
       ),
-      body: ShuffledImageGrid(),
-      // screens[currentIndex],
-      // bottomNavigationBar: BottomNavigationBar(
-      //   currentIndex: currentIndex,
-      //   onTap: (value) {
-      //     setState(() => currentIndex = value);
-      //   },
-      //   selectedItemColor: Color.fromARGB(255, 29, 62, 72),
-      //   unselectedItemColor: const Color.fromARGB(255, 192, 190, 190),
-      //   items: [
-      //     BottomNavigationBarItem(
-      //       label: "Home",
-      //       icon: Icon(Icons.home),
-      //     ),
-      //     BottomNavigationBarItem(
-      //       label: "Favorite",
-      //       icon: Icon(Icons.favorite),
-      //     ),
-      //     BottomNavigationBarItem(
-      //       label: "Profile",
-      //       icon: Icon(Icons.person),
-      //     ),
-      //   ],
-      // ),
+      body: 
+      screens[currentIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: currentIndex,
+        onTap: (value) {
+          setState(() => currentIndex = value);
+        },
+        selectedItemColor: Color.fromARGB(255, 29, 62, 72),
+        unselectedItemColor: const Color.fromARGB(255, 192, 190, 190),
+        items: [
+          BottomNavigationBarItem(
+            label: "Home",
+            icon: Icon(Icons.home),
+          ),
+          BottomNavigationBarItem(
+            label: "Favorite",
+            icon: Icon(Icons.favorite),
+          ),
+          BottomNavigationBarItem(
+            label: "Profile",
+            icon: Icon(Icons.person),
+          ),
+        ],
+      ),
     );
   }
 }
