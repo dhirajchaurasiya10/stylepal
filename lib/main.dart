@@ -3,8 +3,8 @@ import 'package:stylepal/screens/Favourites.dart';
 
 
 import 'package:stylepal/screens/homescreen.dart';
+import 'package:stylepal/screens/profile.dart';
 import 'package:stylepal/shuffledimage.dart';
-import 'package:stylepal/try.dart';
 
 void main() {
   runApp(MyApp());
@@ -33,7 +33,7 @@ class _HomePageState extends State<HomePage> {
   List screens = [
     ShuffledImageGrid(),
     Favourites(),
-    RandomPage(),
+    ProfileScreen(),
   ];
 
   @override
