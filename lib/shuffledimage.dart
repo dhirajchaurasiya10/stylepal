@@ -55,7 +55,7 @@ class _ShuffledImageGridState extends State<ShuffledImageGrid> {
         prefs.getInt(lastShuffleKey) ?? 0);
 
     // Check if 24 hours have passed since the last shuffle
-    if (DateTime.now().difference(lastShuffle).inHours >= 24) {
+    if (DateTime.now().day!= lastShuffle.day) {
       _shuffleImages();
       // Save the current time as the last shuffle time
       prefs.setInt(lastShuffleKey, DateTime.now().millisecondsSinceEpoch);
