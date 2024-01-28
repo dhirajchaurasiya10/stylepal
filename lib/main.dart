@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:stylepal/screens/Favourites.dart';
+import 'package:stylepal/screens/Reminder.dart';
 
 
 // import 'package:stylepal/screens/homescreen.dart';
@@ -33,7 +33,7 @@ class _HomePageState extends State<HomePage> {
   int currentIndex = 0;
   List screens = [
     ShuffledImageGrid(),
-    Favourites(),
+    Reminder(),
     ProfileScreen(),
   ];
 
